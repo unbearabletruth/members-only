@@ -1,4 +1,4 @@
-/*const express = require('express');
+const express = require('express');
 const router = express.Router();
 const User = require('../models/user')
 const user_controller = require("../controllers/userController");
@@ -13,4 +13,3 @@ router.post("/sign-up", user_controller.user_create_post)
 
 
 module.exports = router;
-*/

@@ -9,7 +9,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user");
 const bcrypt = require('bcryptjs')
-//const indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 
 
 mongoose.set("strictQuery", false);
@@ -71,32 +71,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-//app.use('/', indexRouter);
-app.get("/", (req, res) => {
-  console.log(req.user)
-  res.render("index", { user: req.user });
-});
-app.get("/sign-up", (req, res) => res.render("sign-up-form"));
+app.use('/', indexRouter);
 
-app.post("/sign-up", async (req, res, next) => {
-  bcrypt.hash(req.body.password, 10, async (err, hashedPassword) => {
-      if(err){
-          console.log('crypting fail')
-          return
-      } else {
-          console.log('in creation')
-          const user = new User({
-            first_name: req.body.first_name,
-            last_name: req.body.last_name,
-            username: req.body.username,
-            password: hashedPassword,
-            membership_status: "user"
-          });
-          await user.save();
-          res.redirect("/");
-      }
-  });
-});
 app.post(
   "/log-in",
   passport.authenticate("local", {
