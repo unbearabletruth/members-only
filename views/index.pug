@@ -4,8 +4,12 @@ block content
   if (user)
     h1 WELCOME BACK #{user.username}
     a(href="/log-out") LOG OUT
-    p
-      a(href='/join_club') Join club
+    if (user.membership_status === 'user')
+      p
+        a(href='/join_club') Join club
+    else if (user.membership_status === 'member')
+      p We're glad to see you again in our club, honarable #{user.username}!
+    a(href='/new_message') Write a message
   else 
     h1 please log in
     form(action='/log-in' method='POST')
@@ -16,3 +20,11 @@ block content
       button Log In
       p
         a(href='/sign-up') Sign up
+  if (messages)
+    each message in messages 
+      div 
+        if (user && ['member', 'admin'].includes(user.membership_status))
+          p=message.author.username 
+          p=message.timestamp
+        p=message.title 
+        p=message.text

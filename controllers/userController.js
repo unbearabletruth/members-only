@@ -1,12 +1,17 @@
 const User = require("../models/user");
+const Message = require("../models/message");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require('bcryptjs')
 const { body, validationResult } = require("express-validator");
 require('dotenv').config()
 
-exports.index = (req, res, next) => {
-    res.render("index", { user: req.user });
-};
+exports.index = asyncHandler(async (req, res, next) => {
+    const messages = await Message.find().populate('author').exec()
+    res.render("index", { 
+        user: req.user,
+        messages: messages
+    });
+});
 
 exports.user_create_get = (req, res, next) => {
     res.render("sign-up-form")
