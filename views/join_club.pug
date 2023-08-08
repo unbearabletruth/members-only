@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1 Have a password? Hah?
+  form(action='' method='POST')
+    label(for='club_password') Club password
+    input(name='club_password' placeholder='Password' type='text')
+    button Join club
+  if error
+    p= error
+    p= currentUser 

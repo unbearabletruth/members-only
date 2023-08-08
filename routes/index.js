@@ -10,5 +10,9 @@ router.get("/sign-up", user_controller.user_create_get);
 
 router.post("/sign-up", user_controller.user_create_post) 
 
+router.get('/join_club', user_controller.user_join_club_get)
+
+router.post('/join_club', user_controller.user_join_club_post)
+
 
 module.exports = router;

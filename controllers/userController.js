@@ -2,6 +2,7 @@ const User = require("../models/user");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require('bcryptjs')
 const { body, validationResult } = require("express-validator");
+require('dotenv').config()
 
 exports.index = (req, res, next) => {
     res.render("index", { user: req.user });
@@ -68,4 +69,20 @@ exports.user_create_post = [
         
     })
 ];
+
+exports.user_join_club_get = (req, res, next) => {
+    res.render("join_club")
+};
+
+exports.user_join_club_post = asyncHandler(async (req, res, next) => {
+    if (req.body.club_password !== process.env.CLUB_PASSWORD) {
+        res.render("join_club", {
+            error: "Wrong password!",
+        });
+        return;
+    }else {
+        await User.findByIdAndUpdate(req.user._id, { membership_status: 'member' });
+    }
+})
+
 
