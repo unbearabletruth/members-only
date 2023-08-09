@@ -40,8 +40,12 @@ exports.message_create_post = [
 ];
 
 exports.message_delete_get = asyncHandler(async (req, res, next) => {
-  const message = await Message.findById(req.params.id).populate('author').exec()
-  res.render("message_delete", { message: message })
+  if (req.user.admin === true){
+    const message = await Message.findById(req.params.id).populate('author').exec()
+    res.render("message_delete", { message: message })
+  } else {
+    res.redirect('/');
+  }
 });
 
 exports.message_delete_post = asyncHandler(async (req, res, next) => {
