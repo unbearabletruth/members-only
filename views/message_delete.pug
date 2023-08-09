@@ -1,0 +1,9 @@
+extends layout
+
+block content
+   p Delete this message?
+    p #{message.title}
+    p #{message.text}
+
+    form(method='POST' action='')
+      button Delete

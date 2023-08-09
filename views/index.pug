@@ -33,3 +33,5 @@ block content
           p=message.timestamp
         p=message.title 
         p=message.text
+        if (currentUser && currentUser.admin === true)
+          a(href=`/delete/${message._id}`) Delete message

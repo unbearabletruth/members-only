@@ -38,3 +38,13 @@ exports.message_create_post = [
       }
     }),
 ];
+
+exports.message_delete_get = asyncHandler(async (req, res, next) => {
+  const message = await Message.findById(req.params.id).exec()
+  res.render("message_delete", { message: message })
+});
+
+exports.message_delete_post = asyncHandler(async (req, res, next) => {
+  await Message.findByIdAndRemove(req.params.id);
+  res.redirect('/');
+});

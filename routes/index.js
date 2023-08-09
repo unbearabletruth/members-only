@@ -18,4 +18,7 @@ router.post('/is_admin', user_controller.user_is_admin_post)
 router.get('/new_message', message_controller.message_create_get);
 router.post('/new_message', message_controller.message_create_post);
 
+router.get('/delete/:id', message_controller.message_delete_get);
+router.post('/delete/:id', message_controller.message_delete_post);
+
 module.exports = router;
