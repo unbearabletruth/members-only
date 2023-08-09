@@ -4,11 +4,16 @@ block content
   if (user)
     h1 WELCOME BACK #{user.username}
     a(href="/log-out") LOG OUT
-    if (user.membership_status === 'user')
+    if (user.membership_status === false)
       p
         a(href='/join_club') Join club
-    else if (user.membership_status === 'member')
+    else if (user.membership_status === true)
       p We're glad to see you again in our club, honarable #{user.username}!
+    if (user.admin === false)
+      p
+        a(href='/is_admin') Become admin
+    else 
+      p You logged in as admin
     a(href='/new_message') Write a message
   else 
     h1 please log in
@@ -23,7 +28,7 @@ block content
   if (messages)
     each message in messages 
       div 
-        if (user && ['member', 'admin'].includes(user.membership_status))
+        if (user && (user.membership_status === true || user.admin === true))
           p=message.author.username 
           p=message.timestamp
         p=message.title 

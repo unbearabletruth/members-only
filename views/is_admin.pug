@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1 You don't look like an admin material. Prove us otherwise!
+  form(action='' method='POST')
+    label(for='admin_password') Admin password
+    input(name='admin_password' placeholder='Password' type='text')
+    button Become Admin
+  if error
+    p= error

@@ -57,7 +57,8 @@ exports.user_create_post = [
                 last_name: req.body.last_name,
                 username: req.body.username,
                 password: hashedPassword,
-                membership_status: "user"
+                membership_status: false,
+                admin: false
                 });
                 if (!errors.isEmpty()) {
                     res.render("sign-up-form", {
@@ -86,7 +87,24 @@ exports.user_join_club_post = asyncHandler(async (req, res, next) => {
         });
         return;
     }else {
-        await User.findByIdAndUpdate(req.user._id, { membership_status: 'member' });
+        await User.findByIdAndUpdate(req.user._id, { membership_status: true });
+        res.redirect("/");
+    }
+})
+
+exports.user_is_admin_get = (req, res, next) => {
+    res.render("is_admin")
+};
+
+exports.user_is_admin_post = asyncHandler(async (req, res, next) => {
+    if (req.body.admin_password !== process.env.ADMIN_PASSWORD) {
+        res.render("is_admin", {
+            error: "Seems like you not an admin!",
+        });
+        return;
+    }else {
+        await User.findByIdAndUpdate(req.user._id, { admin: true });
+        res.redirect("/");
     }
 })
 
