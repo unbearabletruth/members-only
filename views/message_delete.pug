@@ -1,9 +1,12 @@
 extends layout
 
 block content
-   p Delete this message?
-    p #{message.title}
-    p #{message.text}
-
-    form(method='POST' action='')
-      button Delete
+  p Delete this message?
+  div.message 
+    div.message_header
+      span=message.author.username 
+      span=message.timestamp_formatted
+    p.title Title: #{message.title} 
+    p=message.text
+  form(method='POST' action='')
+    button Delete

@@ -10,4 +10,14 @@ const MessageSchema = new Schema({
   }, 
 );
 
+MessageSchema.virtual("timestamp_formatted").get(function () {
+  let date = this.timestamp
+  let stringDate = date.toLocaleString('en-us', {
+    month: "short",
+    day: "2-digit",
+    hour: "numeric", minute: "numeric"
+  });
+  return stringDate
+});
+
 module.exports = mongoose.model("Message", MessageSchema);

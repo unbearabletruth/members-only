@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Sign Up
-  form(action='' method='POST')
+  form.user_form(action='' method='POST')
     label(for='first_name') First name
     input(name='first_name' placeholder='First name' type='text' value=(user === undefined ? '' : user.first_name))
     label(for='last_name') Last name

@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Enter your message, #{currentUser.username}
-  form(action='' method='POST')
+  form#message_form(action='' method='POST')
     label(for='title') Title
     input(name='title' placeholder='Title' type='text' value=(message === undefined ? '' : message.title))
     label(for='text') Text

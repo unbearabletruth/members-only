@@ -6,3 +6,41 @@ body {
 a {
   color: #00B7FF;
 }
+
+#index{
+  display: flex;
+  gap: 100px;
+}
+
+#messages{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.message{
+  min-height: 100px;
+  width: 350px;
+  padding: 15px;
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+}
+
+.message_header{
+  display: flex;
+  justify-content: space-between;
+  color: #525252;
+}
+
+.title{
+  font-weight: bold;
+}
+
+#message_form,
+.user_form,
+.update_status_form{
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 10px;
+}
